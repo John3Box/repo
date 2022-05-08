@@ -1,0 +1,8 @@
+	ssl_certificate		/acme.sh/3arm.ml/fullchain.cer;
+	ssl_certificate_key	/acme.sh/3arm.ml/3arm.ml.key;
+
+	# ocsp
+	ssl_stapling on;
+	ssl_stapling_verify on;
+	ssl_trusted_certificate /acme.sh/3arm.ml/ca.cer;
+	

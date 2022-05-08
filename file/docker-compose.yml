@@ -1,0 +1,41 @@
+# Warning: This docker-compose file is made for development purposes.
+# Using it will build an image from the locally cloned repository.
+#
+# If you want to use Invidious in production, see the docker-compose.yml file provided
+# in the installation documentation: https://docs.invidious.io/Installation.md
+
+version: "3.9"
+services:
+  php-fpm:
+    image: docker.io/john3box/php-fpm-zip:arm64
+    restart: unless-stopped
+    cap_drop:
+      - mknod
+      - net_admin
+      - sys_admin
+    volumes:
+      - ./php-fpm.d/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf:ro
+      - ./html:/var/www/html
+      - filedata:/var/www/html/data
+
+  nginx:
+    image: docker.io/library/nginx:stable
+    restart: unless-stopped
+    cap_drop:
+      - mknod
+      - net_admin
+      - sys_admin
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
+    volumes:
+      - ./nginx:/etc/nginx:ro
+      - ./html:/var/www/html:ro
+      - ./acme:/acme.sh:ro
+      - filedata:/var/www/html/data:ro
+    depends_on:
+      - php-fpm
+
+volumes:
+  filedata:
+
