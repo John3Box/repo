@@ -15,8 +15,8 @@ services:
       - sys_admin
     volumes:
       - ./php-fpm.d/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf:ro
-      - ./html:/var/www/html
-      - filedata:/var/www/html/data
+      - ./html:/var/www/html:ro
+      - filedata:/var/www/html/file.3arm.ml/filedata
 
   nginx:
     image: docker.io/library/nginx:stable
@@ -29,10 +29,10 @@ services:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
     volumes:
+      - ./acme:/acme.sh:ro
       - ./nginx:/etc/nginx:ro
       - ./html:/var/www/html:ro
-      - ./acme:/acme.sh:ro
-      - filedata:/var/www/html/data:ro
+      - filedata:/var/www/html/file.3arm.ml/filedata
     depends_on:
       - php-fpm
 

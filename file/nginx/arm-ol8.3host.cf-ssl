@@ -1,8 +1,0 @@
-	ssl_certificate		/acme.sh/arm-ol8.3host.cf/fullchain.cer;
-	ssl_certificate_key	/acme.sh/arm-ol8.3host.cf/arm-ol8.3host.cf.key;
-
-	# ocsp
-	ssl_stapling on;
-	ssl_stapling_verify on;
-	ssl_trusted_certificate /acme.sh/arm-ol8.3host.cf/ca.cer;
-	

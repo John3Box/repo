@@ -84,27 +84,27 @@ server {
 	#error_log /dev/null;
 	
 	root /var/www/html/file.3arm.ml;
-        index   index.php;
-        disable_symlinks off;
+	index   index.php;
+	disable_symlinks off;
 
-        client_max_body_size 0;
-        fastcgi_request_buffering off;
+	client_max_body_size 0;
+	fastcgi_request_buffering off;
 
-        # only allow php exec index.php
-        location = /index.php {
-                fastcgi_split_path_info ^(.+?\.php)(/.*)$;
-                if (!-f $document_root$fastcgi_script_name) {
-                        return 404;
-                }
+	# only allow php exec index.php
+	location = /index.php {
+		fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+		if (!-f $document_root$fastcgi_script_name) {
+			return 404;
+		}
 		include fastcgi.conf;
-                #fastcgi_pass unix:/php/www.socket;
-                fastcgi_pass php-fpm:9000;
-                fastcgi_index index.php;
-        }
+		#fastcgi_pass unix:/php/www.socket;
+		fastcgi_pass php-fpm:9000;
+		fastcgi_index index.php;
+	}
 
-	location /file/ {
+	location /filedata/ {
 		autoindex on;
-        	index   index.html;
+		index   index.html;
 	}
 }
 

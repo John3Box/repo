@@ -1,9 +1,10 @@
 #!/bin/sh
 
+_dir=$(dirname $0)
 
 docker run --rm  -it  \
-	-v /opt/docker/file/acme/3arm.ml:/acme.sh/3arm.ml  \
-	-v /opt/docker/file/acme/acme-challenge:/acme.sh/.well-known/acme-challenge \
+	-v ${_dir}/acme/3arm.ml:/acme.sh/3arm.ml  \
+	-v ${_dir}/acme/acme-challenge:/acme.sh/.well-known/acme-challenge \
 	neilpang/acme.sh  --issue -d 3arm.ml \
 	--issue -d file.3arm.ml \
 	--issue -d m.3arm.ml \
