@@ -10,5 +10,6 @@ docker run --rm  -it  \
 	--issue -d m.3arm.ml \
 	--issue -d vnc.3arm.ml \
 	--issue -d www.3arm.ml \
+	--issue -d rss.3arm.ml \
 	--server https://acme-v02.api.letsencrypt.org/directory \
 	-w /acme.sh  "$@"
