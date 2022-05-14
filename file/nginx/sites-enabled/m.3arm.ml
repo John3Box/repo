@@ -1,6 +1,6 @@
 server {
 	listen		80;
-	server_name	3arm.ml www.3arm.ml;
+	server_name	m.3arm.ml;
 
 	root /var/www/html;
 	location /.well-known/acme-challenge/ {
@@ -16,7 +16,7 @@ server {
 
 server {
 	listen		443 ssl http2;
-	server_name	3arm.ml www.3arm.ml;
+	server_name	m.3arm.ml;
 
 	include 3arm.ml-ssl;
 
