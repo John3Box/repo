@@ -3,10 +3,7 @@ server {
 	server_name	m.3arm.ml;
 
 	root /var/www/html;
-	location /.well-known/acme-challenge/ {
-		alias /acme.sh/acme-challenge/;
-	}
-
+	include acme-challenge;
 	location / {
 		return 301 https://$host$request_uri;
 	}
@@ -22,8 +19,6 @@ server {
 
 	index	index.html;
 	root /var/www/html;
-	access_log off;
-	error_log /dev/null;
 	
 	location / {
 		proxy_pass http://172.18.0.1:3000/;

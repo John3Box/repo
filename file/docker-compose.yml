@@ -29,7 +29,7 @@ services:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
     volumes:
-      - ./acme:/acme.sh:ro
+      - acme:/acme.sh:ro
       - ./nginx:/etc/nginx:ro
       - ./html:/var/www/html:ro
       - filedata:/var/www/html/file.3arm.ml/filedata
@@ -37,5 +37,6 @@ services:
       - php-fpm
 
 volumes:
+  acme:
   filedata:
 

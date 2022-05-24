@@ -1,6 +1,6 @@
 server {
 	listen		80;
-	server_name	rss.3arm.ml;
+	server_name	rss.3box.ml;
 
 	root /var/www/html;
 	include acme-challenge;
@@ -13,10 +13,9 @@ server {
 
 server {
 	listen		443 ssl http2;
-	server_name	rss.3arm.ml;
+	server_name	rss.3box.ml;
 
-		return 301 https://rss.3box.ml/$request_uri;
-	include 3arm.ml-ssl;
+	include 3box.ml-ssl;
 
 	index	index.html;
 	root /var/www/html;

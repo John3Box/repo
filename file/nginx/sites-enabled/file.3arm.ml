@@ -3,10 +3,7 @@ server {
 	server_name	file.3arm.ml;
 
 	root /var/www/html;
-	location /.well-known/acme-challenge/ {
-		alias /acme.sh/acme-challenge/;
-	}
-
+	include acme-challenge;
 	location / {
 		return 301 https://$host$request_uri;
 	}
@@ -19,9 +16,6 @@ server {
 	server_name	file.3arm.ml;
 
 	include 3arm.ml-ssl;
-	
-	#access_log off;
-	#error_log /dev/null;
 	
 	root /var/www/html/file.3arm.ml;
 	index   index.php;

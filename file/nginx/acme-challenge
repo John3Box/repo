@@ -1,0 +1,4 @@
+	location /.well-known/acme-challenge/ {
+        alias /acme.sh/.well-known/acme-challenge/;
+    }
+
