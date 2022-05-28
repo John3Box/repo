@@ -1,0 +1,4 @@
+local-zone: "spk-cyberark.cloudsams.edb.local" redirect
+local-data: "spk-cyberark.cloudsams.edb.local	A	10.188.33.38"
+local-zone: "cloudsams.edb.local" redirect
+local-data: "cloudsams.edb.local	A	127.0.0.1"

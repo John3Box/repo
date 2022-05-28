@@ -1,0 +1,50 @@
+# Author: satish@satishweb.com
+# Note: Please use docker-compose-ipv6.yml for ipv6 support
+# Please declare DOLLAR variable to dollar sign before running envsubst command on this file
+
+version: '3'
+#networks:
+#  default:
+
+services:
+  doh-server:
+    image: satishweb/doh-server:latest
+    hostname: doh-server
+    #networks:
+    #  - default
+    environment:
+      # Enable below line to see more logs
+      # DEBUG: "1"
+      UPSTREAM_DNS_SERVER: "udp:unbound:53"
+      DOH_HTTP_PREFIX: "/getnsrecord"
+      DOH_SERVER_LISTEN: "0.0.0.0:8053"
+      DOH_SERVER_TIMEOUT: "10"
+      DOH_SERVER_TRIES: "3"
+      DOH_SERVER_VERBOSE: "false"
+    ports:
+      - 8053:8053/tcp
+    volumes:
+       - ./doh-server.conf:/server/doh-server.conf
+      # - ./app-config:/app-config
+    env_file:
+      - env.conf
+    depends_on:
+      - unbound
+  unbound:
+    image: satishweb/unbound:latest
+    hostname: unbound
+    #networks:
+    #  - default
+    #ports:
+    #  # Disable these ports if DOH server is the only client
+    #  - 53:53/tcp
+    #  - 53:53/udp
+    volumes:
+      - ./unbound.sample.conf:/templates/unbound.sample.conf
+      - ./data/unbound/custom:/etc/unbound/custom
+      # Keep your custom.hosts file inside custom folder
+    env_file:
+      - env.conf
+    #environment:
+    #  DOMAIN_WHITELIST: ${DOMAIN_WHITELIST}
+    #  DEBUG: "1"
